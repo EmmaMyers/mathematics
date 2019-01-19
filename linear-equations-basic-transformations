@@ -1,0 +1,80 @@
+import numpy 
+from numpy import *
+from numpy.linalg import *
+
+#With numpy matrices, you can add, subtract, multiply, find the transpose find the inverse, solve systems of linear equations and much more.
+#Solve a system of consistent linear equations.
+#Right hand side of system of equations has data entered as a list and converted to 3x1 matrix and then a 1x3 matrix using the transpose function. 
+#Similar steps are taken for the matrix A.
+
+rhs= [96, 87, 74]
+rhs=matrix(rhs)
+rhs=transpose(rhs)
+print ('\nRight Hand Side of Equation')
+print (rhs)
+
+A =[[1, 3, 4], [2, 1, 3], [4, 2, 1]]
+A= matrix(A)
+print ('\nMatrix A')
+print (A)
+
+#Numpy has various functions to perform matrix calculations. The inverse function inv() is one of those. Inverse of A
+
+IA= inv(A)
+IA
+
+#In what follows, I am converting matrices with floating point numbers to matrices with integer numbers. 
+#This is optional and being done to show that it is possible to do so with numpy matrices.
+#Note that the function dot() performs matrix multiplication. 
+#Verify inverse by multiplying matrix A and its inverse IA.
+#Identity Matrix
+
+I= dot(IA,A)
+I= int_(I)               # This converts floating point to integer.
+I
+
+#Solve the system of equations and convert to integer values. 
+#With numpy it is necessary to use dot() for the product.
+#Solution to Problem
+
+result = dot(IA,rhs)
+result = int_(result)    # This converts floating point to integer.
+result
+
+#Illustration of solution with linalg.solve(,) function
+
+result2= linalg.solve(A,rhs)
+int_(result2)   # This converts floating point to integer.
+
+#Some square matrices do not have inverses. 
+#The following example shows how this is handled with numpy. 
+#Note the magnitude of the elements.
+#Example of an inverse matrix for inconsistent equations
+
+A= [[1,2,3],[-3,-2,-1], [-1,0,1]]
+A= array(A)
+IA= inv(A)
+IA
+
+import numpy 
+from numpy import * 
+from numpy.linalg import * 
+
+A = [[1,0,1],[2,-2,-1],[3,0,0]]
+A = matrix(A)
+print('\nMatrix A')
+print(A) 
+print('\nInverse of A')
+IA = inv(A) 
+print(IA) 
+print('\nIdentity Matrix')
+I=dot(A,A) 
+print(I) 
+
+M = [[2,4,2], [2,1,2], [2,1,3]]
+M = matrix(M) 
+O = [72,48,60]
+O = transpose(matrix(O))
+result = linalg.solve(M,O) 
+print('\nDailyOrders\n') 
+print(int_(result))
