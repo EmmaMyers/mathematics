@@ -1,0 +1,150 @@
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        recurse = factorial(n - 1)
+        result = n * recurse
+        return result
+
+
+def perm(n, k):
+    if n == 0:
+        return 1
+    if k > n:
+        return -1
+    else:
+        return (factorial(n)) / factorial(n - k)
+
+
+def comb(n, k):
+    result = perm(n, k)
+    result = result / factorial(k)
+    result = int(result)
+    return result
+    
+#Enter the number in the interpreter and hit enter. 
+#Keyboard input will be used for a factorial calculation in the next section.
+#Enter a positive integer to obtain the factorial value. 
+#Enter a negative integer to stop. In either case, hit enter or the code will not work.
+#The statement input() accepts keyboard input and produces a string which must be converted to a numeric variable for further calculations.
+
+inp1 = input("What number should we get thr factorial for?")
+int_inp1 = int(inp1)
+
+if int_inp1 > 0:
+    fact_of_inp = factorial(int_inp1)
+    print('Factorial of {} is equal to {}'.format(int_inp1, fact_of_inp))
+else:
+    print('No calculation.')
+    
+# Example calculations follow.
+permutation = perm(10, 5)
+print('Permutation of 10 elements taken 5 at a time ={}'.format(permutation))
+
+combination = comb(10, 5)
+print('Combination of 10 elements taken 5 at a time = {}'.format(combination))
+
+#In the code which follows, note the type conversions from string to integer, integer to floating point and back.\
+#In each instance, hit enter after submitting the requested number. 
+#Enter a positive integer for the number of repeated trials.
+
+inp = input("Number of Trials:")
+int_inp = int(inp)  # This converts n from a string to an integer.
+
+success = input("Number of Successes:")
+int_success_int = int(success)
+
+prob_of_s = input("Probability of Success:")
+int_prob_of_s = float(prob_of_s)  # This converts p from a string to a floating point number.
+
+prob = (comb(int_inp, int_success_int)) *\
+       (int_prob_of_s ** int_success_int) * \
+       ((1.0 - int_prob_of_s) ** (int_inp - int_success_int))
+print('Binomial probability with n = {}, k= {}, p= {} is {}\n'.format(int_inp, int_success_int, int_prob_of_s, prob))
+
+#The following example shows how to calculate a binomial distribution and print the result. 
+#First a binomial function will be defined. 
+#The values previously entered for the number of repeated trials, the number of successes and the probability of success 
+#will be used.
+
+def binomial(n, k, p):
+    return (comb(n, k)) * (p ** k) * ((1.0 - p) ** (n - k))
+
+
+print('Binomial distribution with {} trials and p={} follows'.format(int_inp, int_prob_of_s))
+distribution = []
+for i in range(0, int_inp + 1):
+    prob = binomial(int_inp, i, int_prob_of_s)
+    print('# of successes = {} probability = {:2.2f}'.format(i, prob))
+    distribution = distribution + [prob]
+
+x = range(0, int_inp + 1, 1)  # x and y are both lists with the same number of elements.
+y = distribution
+
+#The plot is produced in layers. bar() places the red bars of width 0.4 centered on x values. 
+#The heigth is determined by y. 
+#The plot() statement places the line plot on the chart. With only one show() statement, the figure() statement is unnecessary.
+
+import matplotlib.pyplot as plt
+plt.figure()
+plt.bar(x, y, width=0.4, align='center', color='r')
+plt.plot(x, y)
+plt.xlabel('Total Number of Trials')
+plt.ylabel('Probability of Success')
+plt.title('Binomial Probabilities ')
+plt.show()
+
+U=set([0,1,2,3,4,5,6,7,8,9,10,11,12]) 
+A=set([1,3,5,7,9])
+B=set([3,6,9,12])
+C=set([1,2,3,4,5])
+
+P=round(len(A&C)/float(len(C)),3)
+print ('Conditional probability of A given C is {}'.format(P)) 
+Q=round((len(C)/float(len(U))),3)
+print ('Probability of C is {}' .format(round(Q,3)))
+Qc=1.0-Q
+print ('Probability of C complement is {}' .format(round(Qc,3))) 
+R=round(len(A&(U-C))/float(len(U-C)),3)
+print ('Conditional probabilty of A given C complement is {}'.format(R)) 
+Bayes_Result= round((Q*P/(Q*P+R*Qc)),3)
+print ('Bayes Result for Probability of C given A {}'.format(Bayes_Result))
+
+def factorial(n): 
+    if n == 0:
+        return 1 
+    else:
+        recurse = factorial(n - 1) 
+        result = n * recurse 
+        return result
+
+def perm(n, k): 
+    if n == 0:
+        return 1 
+    if k > n:
+        return -1 
+    else:
+        result = (factorial(n)) / factorial(n - k) 
+    return result
+
+def comb(n, k):
+    result = perm(n, k)
+    result = (result) / factorial(k) 
+    result = int(result)
+    return result
+
+print ('Example 3, 3 letters is {}'.format(perm(3,3)))
+print ('Example 3, two of three letters is {}'.format(perm(3,2))) 
+P=(factorial(11))/(factorial(1)*factorial(4)*factorial(4)*factorial(2)) 
+print ('Example 9, Mississippi is {}'.format(P))
+print ('Example 3, Sales is {}'.format(comb(10,3)))
+
+
+def fact(n): 
+    if n == 0:
+        return 1 
+    else:
+        result=1
+        for k in range(0,n):
+            result = result*(k+1) 
+    return result
