@@ -1,0 +1,41 @@
+import matplotlib.pyplot
+from matplotlib.pyplot import *
+import numpy 
+from numpy import linspace
+from numpy import arange 
+
+x= linspace(-1,1000,10000)
+y1= 107*x
+y2= 24000 + (36)*x
+
+#plotting the cost and revenue function lines with breakeven point
+xlabel('x-axis')
+ylabel('y-axis')
+plot (x, y1, 'r')
+plot (x, y2, 'b')
+legend (('Revenue Function y =107x','Cost Function y = 24000 + 36x'),loc=3)
+title ('Cost and Revenue Functions with Breakeven Point')
+show()
+
+#plotting the feasible region
+figure() 
+x = arange(0,50,5) 
+y1= 30 - x 
+y2= 45 - x
+y3= 10 +0.0*x
+y4=(2/3)*x
+y6= np.maximum(y1, y4)
+
+#setting the lower bound as the maximum of lines y1 and y3
+xlim(0,50) 
+ylim(0,50) 
+xlabel('x-axis') 
+ylabel('y-axis') 
+plot(x, y1, c='r', label='30-x')
+plot(x, y2, c='b', label='45-x') 
+plot(x, y3, c='c', label='10')
+plot(x, y4, c='g', label='(2/3)x')
+legend(['30-x', '45-x', '10', '(2/3)x'], loc='best')
+fill_between(x, y2, y6, where=(y6 <= y2), color='m') 
+title('Shaded Area Shows the Feasible Region')
+show()
