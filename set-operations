@@ -1,0 +1,131 @@
+#Various set operations will be performed. 
+#The first steps are to define the lists of data which will then be converted into set objects. 
+#Various set operations will be demonstrated. 
+#Finally, a set will be converted to a list.
+
+# set([1, 2, 3]) is the same as {1, 2, 3}. The former is easier to read, but the later is about twice as fast for the CPU.
+U = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}
+A = {1, 2, 4, 5, 7}
+B = {2, 4, 5, 7, 9, 11}
+
+#The following generates new variables only to facilitate printing. 
+#The variables Uab, AB, Ac, Bc, AsB, R, Add, Addc and SD are for my convenience only. 
+#The important thing is to study the set operations.
+
+Uab = A | B
+print('Union of A and B =', Uab)
+
+AB = A & B
+print('Intersection of A and B =', AB)
+
+Ac = U - A
+Bc = U - B
+print('A complement =', Ac)
+print('B complement =', Bc)
+
+AsB = A ^ B  # Example of finding the symmetric difference of A and b. The symmetric difference are elements in A and B not common to both
+print('Symmetric difference of A and B = ', AsB)
+
+SD = (A | B) - (A & B)  # Example showing another way to obtain the symmetric difference
+print('Symmetric difference by union and intersection =', SD)
+
+R = Ac | Bc | AB  # Union of several sets
+print('Union of Ac, Bc and AB  ', R)
+print('Original set U was ', U)
+
+Add = {12, 13, 14}  # Items can be added to sets using the union operation
+U = U | Add
+print('Updated version of U = ', U)
+
+Addc = U - Add  # Removal is possible using the complement operation
+U = U & Addc
+print('Original version of U =', U)
+
+U = list(U)  # Following these operations, a set may be converted to a list.
+print('U is now a list.', U)
+
+#Generate the universe U. Note that range(1,27,1) will be used to produce a list of 26 positive integers for set operations. 
+#Remember, range() includes the first, i.e. 1, but not the last element, i.e. 27. 
+#The third argument, 1, defines the step used between consecutive elements. 
+#Note that the functions used in this module are available from Python itself.
+#Slice the list U into three subsets. 
+#Note that slicing is inclusive of the first indexed element and exclusive of the last indexed element. 
+#Also, the first element has 0 for an index.
+
+U = range(1, 27)
+A = U[0:13]
+B = U[13:]
+C = U[7:20]
+
+A = set(A)
+B = set(B)
+C = set(C)
+U = set(U)
+print('The universe U is', U)
+
+print('A is', A)  # Compare these sets to the slice statements above.
+print('B is', B)
+print('C is', C)
+
+#It is assumed in this module that each element of U occurs with equal probability as would be the case with random sampling with replacement. 
+#This assumption allows the probability of a set to be calculated as the ratio of the length of the 
+#set (i.e. number of elements) divided by the overall length of U which in this Module is 26. 
+#Note that %r and %s both can be used with strings and lists.
+#Convert the length of T to floating point to avoid interger division. 
+#The function round() was defined in earlier modules as was float()
+
+T = float(len(U))
+
+Null = A & B  # Demonstrate the null intersection and probability.
+print('Probability of null intersection ', round((len(Null)/T), 3))
+
+print('Intersection of A and C is ', (A & C))  # Demonstrate the Union Rule for Probability.
+print('Union of A and C ', (A | C))
+
+P = (len(A) + len(C) - len(A & C))
+print('Probability of A union C = ', round((len(A | C)/T), 3))
+print('Result of Union Rule Summation =', ((P/T), 3))
+
+# Demonstrate the calculation of Odds using the complement rule.
+print('Complement of C is', (U-C))
+print('Odds of C are', round((len(C)/float(len(U-C))), 3))
+
+print('Complement of A intersection C is', U-(A & C))
+P = (len(A & C)/float(len(U-(A & C))))
+print('Odds of A intersection C are', round(P, 3))
+
+# Demonstrate conditional probability.
+P = round(len(A & C)/float(len(C)), 3)
+print('Conditional probability of A given C is', P)
+
+# Demonstrate the product rule.
+print('Probability of A and C intersection is', round((len(A & C)/T), 3))
+Q = len(C)/T
+print('Probability of C is', round(Q, 3))
+print('Product rule result for A and C intersection is', round(P*Q, 3))
+
+#Using the sets defined above and set operations apply Bayes' Theorem. 
+#Calculate the conditional probability of A given C, and the probability of C given A.
+
+print ('Example 6 Set Operations\n') 
+U=set([0,1,2,3,4,5,6,7,8,9,10]) 
+A=set([3,6,9])
+B=set([2,4,6,8])
+print ('U is {} '.format(U))
+print ('A is {} '.format(A))
+print ('B is {} '.format(B))
+print('\nA intersection B is {}'.format(A&B)) 
+Bc=U-B
+print('\nA intersection B complement is {}'.format((A&Bc)))
+print ('Example 7 Union of Sets\n') 
+U=set([0,1,2,3,4,5,6,7,8,9,10,11,12]) 
+A=set([1,3,5,7,9,11]) 
+B=set([3,6,9,12])
+C=set([1,2,3,4,5])
+print ('U is {} '.format(U))
+print ('A is {} '.format(A))
+print ('B is {} '.format(B))
+print ('C is {} '.format(C))
+print ('\nA union B is {}'.format(A|B))
+Cc=U-C
+print ('Union of A and B intersected with C complement is {} '.format(((A|B)&Cc)))
