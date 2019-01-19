@@ -1,0 +1,77 @@
+import matplotlib.pyplot 
+from matplotlib.pyplot import *
+import numpy 
+from numpy import *
+
+#This is a minimization problem. One objective is to demonstrate plotting an unbounded region. 
+#There are four inequalities: x+3y >= 15, 3x+y >= 10, x >= 0, y >= 0. 
+#One inequality and the objective function have been modified for this module. 
+#The objective function is z = 2x+3y. 
+#The feasible region will be graphed and filled. 
+#Matrix methods will be used to evaluate the objective function at each corner.
+
+x= arange(0,20.1,0.1)
+y0= arange(0,20.1,0.1)
+y1= 10.0-3.0*x
+y2= 5.0-x/3.0
+y3 = 20+0.0*x  # The definition of y3 will allow filling the unbounded region in the plot.
+
+#The filling will be between y3 and the maximum of y1 and y2. 
+#Need to define a new array y4 which will be that maximum.
+
+y4 = list()  # Start as an empty list and add the greater of y1/y2 to it for each point
+for y1_val, y2_val in zip(y1, y2):
+    # Zip allows us to loop over both lists at the same time.
+    y4_val = max([y1_val, y2_val])  # Get the greater of the two
+    y4.append(y4_val)  # Add it to our list
+    
+y5= 5.5-2.0*x/3.0  # This is the objective function plotted for illustration.
+
+xlim(0,20)
+ylim(0,20)
+xlabel('x-axis')
+ylabel('y-axis')
+title('Shaded Area Shows the Feasible Region')
+plot(x,y2,color='b', label='x+3y >= 15')
+plot(x,y1,color='r', label='3x+y >= 10')
+plot(x,y5,'k--', label='16.5 = 2x+3y')
+legend()
+fill_between(x,y3,y4, color='grey',alpha=0.2)
+show()
+
+#Corner points for evaluation using the objective function.
+x= [0, 1.5, 15]
+y= [10, 4.5, 0]
+
+#This next step shows how to use matrix calculations to evaluate the objective function at each corner point 
+#and find the maximum.
+
+obj= matrix([2.0,3.0])
+obj= transpose(obj)
+corners= matrix([x,y])
+corners= transpose(corners)
+result= dot(corners,obj)
+print ('Value of Objective Function at Each Corner Point\n', result)
+
+import numpy
+from numpy import *
+from numpy.linalg import *
+
+print ('\nMinimization Problem') 
+x =[0,4,9]
+y =[5,1,0]
+obj= matrix([8.0,16.0])
+obj= transpose(obj)
+corners= matrix([x,y])
+corners= transpose(corners)
+result= dot(corners,obj)
+print ('Value of Objective Function at Each Corner Point\n', result) 
+print ('\nMaximization Problem')
+x =[0,2,3.2]
+y =[4,3,0]
+obj= matrix([9.0,10.0])
+obj= transpose(obj)
+corners= matrix([x,y])
+corners= transpose(corners)
+result= dot(corners,obj)
+print ('Value of Objective Function at Each Corner Point\n', result)
